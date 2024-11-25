@@ -1,0 +1,38 @@
+name: Build and Deploy Blazor WebAssembly
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0' 
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build Blazor WebAssembly
+      run: dotnet build --configuration Release
+
+    - name: Publish Blazor WebAssembly
+      run: dotnet publish --configuration Release -o ./build
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: blazor-build
+        path: ./build

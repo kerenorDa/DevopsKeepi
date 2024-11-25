@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\Client",
+    "\\Client\\Communication",
+    "\\Client\\Properties",
+    "\\Client\\Repositories",
+    "\\Client\\Repositories\\Implementation",
+    "\\Client\\Services",
+    "\\Server"
+  ],
+  "SelectedNode": "\\Server\\Keepi.Server.csproj",
+  "PreviewInSolutionExplorer": false
+}
