@@ -39,7 +39,7 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(builder.Environment.ContentRootPath, "User Profiles")),
     RequestPath = "/User Profiles"
 });
-
+  
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
