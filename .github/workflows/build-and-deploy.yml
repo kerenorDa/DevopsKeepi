@@ -99,4 +99,9 @@ jobs:
 
 
     - name: Deploy to Production
-      run: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+      run: |
+       echo "Current directory:"
+       pwd
+       echo "Files in current directory:"
+       ls -la
+       docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
