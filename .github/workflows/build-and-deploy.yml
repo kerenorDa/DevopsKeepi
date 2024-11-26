@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - develop
+      - staging
       - master
-  pull_request:
-    branches:
-      - develop
 
 jobs:
   build:
@@ -20,22 +18,46 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0' 
+        dotnet-version: '7.0'
 
     - name: Install dependencies
       run: dotnet restore
 
-    - name: Build Blazor WebAssembly
+    - name: Build application
       run: dotnet build --configuration Release
 
     - name: Run Tests
       run: dotnet test
 
-    - name: Publish Blazor WebAssembly
-      run: dotnet publish --configuration Release -o ./build
+  deploy-development:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
 
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: blazor-build
-        path: ./build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Development
+      run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Staging
+      run: docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d
+
+  deploy-production:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Production
+      run: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d

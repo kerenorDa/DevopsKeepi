@@ -1,0 +1,9 @@
+services:
+  web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=db;Database=keepi_prod;User=sa;Password=ProdPassword123
+  db:
+    environment:
+      SA_PASSWORD: "ProdPassword123"
+
