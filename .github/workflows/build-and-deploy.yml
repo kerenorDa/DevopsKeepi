@@ -1,4 +1,4 @@
-name: Build and Deploy Blazor WebAssembly
+name: Build, Test, and Deploy Blazor WebAssembly
 
 on:
   push:
@@ -27,6 +27,9 @@ jobs:
 
     - name: Build Blazor WebAssembly
       run: dotnet build --configuration Release
+
+    - name: Run Tests
+      run: dotnet test
 
     - name: Publish Blazor WebAssembly
       run: dotnet publish --configuration Release -o ./build
