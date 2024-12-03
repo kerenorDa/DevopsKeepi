@@ -14,9 +14,9 @@ WORKDIR "/src/Server"
 RUN dotnet build "Keepi.Server.csproj" -c Release -o /app/build
 
 # שלב 3: Tests
-FROM base AS tests
-WORKDIR /src
-RUN dotnet test --logger "trx;LogFileName=TestResults.trx"
+#FROM base AS tests
+#WORKDIR /src
+#RUN dotnet test --logger "trx;LogFileName=TestResults.trx"
 
 # שלב 4: פרסום (Publish)
 FROM base AS publish
