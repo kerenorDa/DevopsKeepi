@@ -18,9 +18,9 @@ FROM base AS publish
 WORKDIR /src/Server
 RUN dotnet publish "Keepi.Server.csproj" -c Release -o /app/publish
 
-# שלב 4: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=tests /src/TestResults/ . # שמירת תוצאות הבדיקות (אם צריך)
 ENTRYPOINT ["dotnet", "Keepi.Server.dll"]
 
