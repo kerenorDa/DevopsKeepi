@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   web:
-    image: my-blazor-app:prod
     build:
       context: .
       dockerfile: Dockerfile
+    image: my-blazor-app:prod
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ConnectionStrings__DefaultConnection=Server=db;Database=keepi_prod;User=sa;Password=ProdPassword123
@@ -20,9 +20,10 @@ services:
     ports:
       - "1433:1433"
     environment:
-      SA_PASSWORD: "YourStrong!Password"
-      ACCEPT_EULA: "Y"
+      - SA_PASSWORD=ProdPassword123
+      - ACCEPT_EULA=Y
     volumes:
       - sql_data:/var/opt/mssql
+
 volumes:
   sql_data:
