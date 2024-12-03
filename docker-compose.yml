@@ -1,7 +1,5 @@
-#version: "3.8"
-
 services:
-  db:
+  sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: keepi_db
     environment:
@@ -26,12 +24,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./Logs:/app/Logs
-
-networks:
-  default:
-    name: keepi_network
-
+      - sql_data:/var/opt/mssql
 volumes:
   db_data:
     name: keepi_db_data
