@@ -27,5 +27,5 @@ RUN dotnet publish "Keepi.Server.csproj" -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=tests /src/TestResults/ . # שמירת תוצאות הבדיקות
+#COPY --from=tests /src/TestResults/ . # שמירת תוצאות הבדיקות
 ENTRYPOINT ["dotnet", "Keepi.Server.dll"]
