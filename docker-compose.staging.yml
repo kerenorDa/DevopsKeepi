@@ -1,8 +1,27 @@
 services:
-  web:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Staging
-      - ConnectionStrings__DefaultConnection=Server=db;Database=keepi_staging;User=sa;Password=StagingPassword123
   db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
     environment:
       SA_PASSWORD: "StagingPassword123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - keepi_sql_data:/var/opt/mssql
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: keepi
+    depends_on:
+      - db
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Staging"
+      ConnectionStrings__DefaultConnection: "Server=db;Database=keepi_staging;User=sa;Password=StagingPassword123"
+    ports:
+      - "5000:5000"
+
+volumes:
+  keepi_sql_data:
