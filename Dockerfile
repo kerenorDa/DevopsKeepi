@@ -21,10 +21,10 @@ RUN dotnet publish "Keepi.Server.csproj" -c Release -o /app/publish
 #     4:             (Client.Tests)
 FROM base AS tests
 WORKDIR /src
-COPY ["Keepi.Client/Client.Tests/Keepi.Client.Tests.csproj", "Keepi.Client/Client.Tests/"]
+COPY ["Keepi.Client/Client.tests/Keepi.Client.Tests.csproj", "Keepi.Client/Client.tests/"]
 COPY ["Shared/Keepi.Shared.csproj", "Shared/"]
 COPY ["Server/Keepi.Server.csproj", "Server/"]
-RUN dotnet restore "Client.Tests/Keepi.Client.Tests.csproj"
+RUN dotnet restore "Client.tests/Keepi.Client.Tests.csproj"
 COPY . .
 
 WORKDIR "/src/Client.Tests"
