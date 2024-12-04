@@ -21,15 +21,15 @@ RUN dotnet publish "Keepi.Server.csproj" -c Release -o /app/publish
 #     4:             (Client.Tests)
 FROM base AS tests
 WORKDIR /src
-COPY ["Keepi.Client/Client.tests/Client.Tests.csproj", "Client.tests/"]
+COPY ["Client.Tests/Client.Tests.csproj", "Client.Tests/"]
 COPY ["Shared/Keepi.Shared.csproj", "Shared/"]
 COPY ["Server/Keepi.Server.csproj", "Server/"]
-RUN dotnet restore "Client.tests/Client.Tests.csproj"
+RUN dotnet restore "Client.Tests/Client.Tests.csproj"
+
 COPY . .
 
-WORKDIR "/src/Client.tests"
+WORKDIR "/src/Client.Tests"
 RUN dotnet test --logger:trx
-
 #     5: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
