@@ -1,0 +1,8 @@
+services:
+  web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+      - ConnectionStrings__DefaultConnection=Server=db;Database=keepi_staging;User=sa;Password=StagingPassword123
+  db:
+    environment:
+      SA_PASSWORD: "StagingPassword123"
