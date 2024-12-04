@@ -23,7 +23,7 @@ FROM base AS publish
 WORKDIR /src/Server
 RUN dotnet publish "Keepi.Server.csproj" -c Release -o /app/publish
 
-# ωμα 5: Runtime
+# ωμα 5: Runtime 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 COPY --from=publish /app/publish .
