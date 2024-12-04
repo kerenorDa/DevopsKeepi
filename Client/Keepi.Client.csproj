@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Client.tests\Client.Tests %281%29.csproj" />
+    <None Include="Client.tests\Keepi.Client.Tests.csproj" />
   </ItemGroup>
 
 </Project>
