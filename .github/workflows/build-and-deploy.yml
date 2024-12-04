@@ -47,9 +47,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Clean and Fix Dependencies
+        run: |
+          sudo apt-get clean
+          sudo apt-get autoclean
+          sudo apt-get autoremove -y
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt-get dist-upgrade -y
+
       - name: Set up Docker
         run: |
-          sudo apt-get update
           sudo apt-get install -y docker.io
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
@@ -66,9 +74,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Clean and Fix Dependencies
+        run: |
+          sudo apt-get clean
+          sudo apt-get autoclean
+          sudo apt-get autoremove -y
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt-get dist-upgrade -y
+
       - name: Set up Docker
         run: |
-          sudo apt-get update
           sudo apt-get install -y docker.io
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
@@ -85,9 +101,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Clean and Fix Dependencies
+        run: |
+          sudo apt-get clean
+          sudo apt-get autoclean
+          sudo apt-get autoremove -y
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt-get dist-upgrade -y
+
       - name: Set up Docker
         run: |
-          sudo apt-get update
           sudo apt-get remove -y docker docker-engine docker.io containerd runc || true
           sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -101,4 +125,3 @@ jobs:
 
       - name: Deploy to Production
         run: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-
